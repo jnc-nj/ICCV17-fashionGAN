@@ -1,11 +1,14 @@
 clear;
+import cv.FileStorage
 fn = dir('./input/*.png');
 assert(length(fn) > 0, 'There is no input images (png and jpg only).');
 f = fopen('./cache/script1.txt','w');
 for i = 1:length(fn)
     n = fn(i).name;
     yml_fn = ['./cache/' n(1:end-4) '_pose.yml'];
-    x = parseYML(yml_fn);
+    disp(yml_fn)
+    x = cv.FileStorage(yml_fn).pose_0;
+    disp(x)
     xdxd = zeros(size(x,1), 4);
     for j = 1:size(x,1)
         y = squeeze(x(j,:,:));

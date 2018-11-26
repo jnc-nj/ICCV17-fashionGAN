@@ -1,11 +1,13 @@
 # Assume you have the folling env:
 # OPENPOSE_DIR, CUDA_VISIBLE_DEVICES(optional)
 CURRENT_DIR=$(pwd)
+echo $CURRENT_DIR
+echo $OPENPOSE_DIR
 rm -r cache
 rm -r output
 mkdir cache
 cd $OPENPOSE_DIR
-./build/examples/openpose/openpose.bin --image_dir $CURRENT_DIR/input/ --no_display --write_keypoint=$CURRENT_DIR/cache
+./build/examples/openpose/openpose.bin --image_dir $CURRENT_DIR/input/ --display=0 --render_pose=0 --write_keypoint=$CURRENT_DIR/cache
 cd $CURRENT_DIR
 matlab -nodesktop -nojvm -r "script1; exit"
 SEG_MODEL=./latest_2.t7 th test_seg.lua
